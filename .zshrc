@@ -14,7 +14,13 @@ source $ZSH/oh-my-zsh.sh
 # ==		Exports		==
 # ========================
 
-export PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/bin"
+
+# LaTeX
+export PATH="$PATH:/usr/texbin"
+
+# Racket
+export PATH=$PATH:/Applications/Racket\ v6.1/bin
 
 # Prefer US English and use UTF-8
 export LANG=en_US.UTF-8
@@ -54,6 +60,9 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 # ========================
 
 # Easier navigation: .., ..., ...., ....., ~ and -
+
+alias dotfiles="~/Projects/dotfiles/bootstrap.sh"
+
 alias ..="cd .."
 alias ...="cd ../.."
 
