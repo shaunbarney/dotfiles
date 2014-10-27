@@ -422,5 +422,11 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
+function activate() {
+	export VIRTUAL_ENV_DISABLE_PROMPT='1';
+	source ./$1/bin/activate;
+}
 
+alias act=activate
+alias deact=deactivate
 
