@@ -4,8 +4,9 @@ cd "$(dirname "${BASH_SOURCE}")";
 
 function doIt() {
 	rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
-		--exclude "misc/" --exclude "README.md" --exclude "LICENSE-MIT.txt"
+		--exclude "misc/" --exclude "README.md" --exclude "LICENSE-MIT.txt" \
 		-avh --no-perms . ~;
+	python3 misc/sublime/Update.py
 }
 
 doIt;
