@@ -14,7 +14,7 @@ source $ZSH/oh-my-zsh.sh
 # ==		Exports		==
 # ========================
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/bin"
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:~/bin
 
 # LaTeX
 export PATH="$PATH:/usr/texbin"
@@ -24,6 +24,12 @@ export PATH=$PATH:/Applications/Racket\ v6.1/bin
 
 # Sublime
 export PATH=$PATH:/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
+
+# OS161
+export PATH=$PATH:~/Projects/OS/sys161/bin:~/Projects/OS/sys161/tools/bin
+
+# coreutils
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 # Prefer US English and use UTF-8
 export LANG=en_US.UTF-8
@@ -183,9 +189,10 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
-alias proj="cd ~/Projects"
-
-
+alias p1="cd ~/Projects"
+alias p2="cd /Volumes/Data/Projects"
+alias oo="cd ~/Projects/School/CS246"
+alias wb="cd ~/Projects/Web/zihao.me/zihao.me"
 # ============================
 # ==		Functions		==
 # ============================
@@ -431,6 +438,10 @@ function tre() {
 function activate() {
 	export VIRTUAL_ENV_DISABLE_PROMPT='1';
 	source ./$1/bin/activate;
+}
+
+function pingtest() {
+	ping -c20 google.com
 }
 
 alias act=activate
