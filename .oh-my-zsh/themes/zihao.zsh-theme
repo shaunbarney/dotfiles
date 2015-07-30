@@ -1,21 +1,21 @@
 function venv_prompt_info {
-    [ $VIRTUAL_ENV ] && echo $(bracket %{$fg_bold[cyan]%}`basename $VIRTUAL_ENV`)
+    [ $VIRTUAL_ENV ] && echo $(bracket %{$fg[cyan]%}`basename $VIRTUAL_ENV`)
 }
 
 function user {
-	echo %{$fg_bold[green]%}%n%{$reset_color%}@%{$fg_bold[cyan]%}%m
+	echo %{$fg[green]%}%n%{$reset_color%}@%{$fg[cyan]%}%m
 }
 
 function path {
-	echo %{$fg_bold[white]%}%~
+	echo %{$fg[white]%}%~
 }
 
 function bracket {
-	echo %{$fg_bold[blue]%}'['$1%{$fg_bold[blue]%}']'
+	echo %{$fg[blue]%}'['$1%{$fg[blue]%}']'
 }
 
-PROMPT=$'%{$fg_bold[blue]%}┌$(bracket $(user)) $(bracket $(path))$(git_prompt_info) $(venv_prompt_info)
-%{$fg_bold[blue]%}└%{$fg_bold[blue]%}[%(?.%{$fg_bold[magenta]%}.%{$fg[red]%})%(!.#.$)%{$fg_bold[blue]%}]%{$reset_color%}%b'
+PROMPT=$'%{$fg[blue]%}┌$(bracket $(user)) $(bracket $(path))$(git_prompt_info) $(venv_prompt_info)
+%{$fg[blue]%}└%{$fg[blue]%}[%(?.%{$fg[magenta]%}.%{$fg[red]%})%(!.#.$)%{$fg[blue]%}]%{$reset_color%}%b'
 
 RPROMPT=$'%{$fg[blue]%}%B[%b%{\e[0;33m%}'%D{"%I:%M%P, %Y-%m-%d"}%b$'%{$fg[blue]%}%B%{]%}%b%{$reset_color%}'
 

@@ -119,6 +119,8 @@ sudo pmset -a sms 0
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
+defaults write NSGlobalDomain com.apple.mouse.scaling -1
+
 # Trackpad: enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
@@ -579,5 +581,11 @@ defaults write com.twitter.twitter-mac ShowFullNames -bool true
 
 # Hide the app in the background if it’s not the front-most window
 defaults write com.twitter.twitter-mac HideInBackground -bool true
+
+
+# Sublime
+
+defaults write com.sublimetext.3 ApplePressAndHoldEnabled -bool false
+
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
