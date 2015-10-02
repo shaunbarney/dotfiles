@@ -1,25 +1,36 @@
-function venv_prompt_info {
-    [ $VIRTUAL_ENV ] && echo $(bracket %{$fg[cyan]%}`basename $VIRTUAL_ENV`)
+function topcorner {
+  echo "%{$fg[blue]%}┌"
 }
 
-function user {
-	echo %{$fg[green]%}%n%{$reset_color%}@%{$fg[cyan]%}%m
-}
-
-function path {
-	echo %{$fg[white]%}%~
+function botcorner {
+  echo "%{$fg[blue]%}└"
 }
 
 function bracket {
-	echo %{$fg[blue]%}'['$1%{$fg[blue]%}']'
+  [ -n "$1" ] && echo -n "%{$fg[blue]%}[$1%{$fg[blue]%}]"
+  echo " "
 }
 
-PROMPT=$'%{$fg[blue]%}┌$(bracket $(user)) $(bracket $(path))$(git_prompt_info) $(venv_prompt_info)
-%{$fg[blue]%}└%{$fg[blue]%}[%(?.%{$fg[magenta]%}.%{$fg[red]%})%(!.#.$)%{$fg[blue]%}]%{$reset_color%}%b'
+function user {
+	echo "%{$fg[green]%}%n%{$fg_bold[white]%}@%b%{$fg[cyan]%}%m"
+}
 
-RPROMPT=$'%{$fg[blue]%}%B[%b%{\e[0;33m%}'%D{"%I:%M%P, %Y-%m-%d"}%b$'%{$fg[blue]%}%B%{]%}%b%{$reset_color%}'
+function directory {
+  echo "%{$fg[white]%}%~"
+}
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" %B%{$fg[blue]%}[%{$fg[cyan]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}]"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}*"
+function venv_prompt_info {
+  [ $VIRTUAL_ENV ] && echo $(bracket %{$fg[cyan]%}`basename $VIRTUAL_ENV`)
+}
+
+function prompt_info {
+  echo "%(?.%{$fg[magenta]%}.%{$fg[red]%})%(!.#.$)"
+}
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_CLEAN=""
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*"
+
+PROMPT=$'$(topcorner)$(bracket $(user))$(bracket $(directory))$(bracket $(git_prompt_info))$(venv_prompt_info)
+$(botcorner)$(bracket $(prompt_info))%{$fg[white]%}'
