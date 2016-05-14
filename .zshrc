@@ -334,8 +334,12 @@ function pingtest() {
 # ==     Other      ==
 # ====================
 
+export CLASSPATH=~/Projects/cs241/pub/classes:$CLASSPATH
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+
+export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
+
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-
-
-
 
