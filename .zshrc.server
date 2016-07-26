@@ -49,11 +49,11 @@ ZSH_THEME="zihao"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sublime)
+plugins=(git)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # ==      Custom      ==
 # ======================
 
-export PATH=$PATH:usr/local/sbin:~/bin
+export PATH=$PATH:/usr/local/sbin:~/bin
 
 # Prefer US English and use UTF-8
 export LANG=en_US.UTF-8
