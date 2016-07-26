@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # ==      Custom      ==
 # ======================
 
-export PATH=$PATH:/usr/local/sbin:~/bin
+export PATH=~/bin:$PATH
 
 # Prefer US English and use UTF-8
 export LANG=en_US.UTF-8
