@@ -49,7 +49,7 @@ ZSH_THEME="zihao"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sublime)
+plugins=(sublime)
 
 # User configuration
 
@@ -87,16 +87,13 @@ source $ZSH/oh-my-zsh.sh
 # ==      Custom      ==
 # ======================
 
-export PATH=$PATH:usr/local/sbin:~/bin
+export PATH=$PATH:/usr/local/sbin:~/bin
 
 # LaTeX
 export PATH=$PATH:/usr/texbin
 
 # Racket
 export PATH=$PATH:/Applications/Racket\ v6.1/bin
-
-# OS161
-export PATH=$PATH:~/Projects/OS/sys161/bin:~/Projects/OS/sys161/tools/bin
 
 # coreutils
 export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
@@ -142,6 +139,7 @@ alias p2="cd /Volumes/Data/Projects"
 alias sc="cd ~/Projects/School"
 
 alias grim="git rebase -i master"
+alias octave="octave --no-gui"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -330,6 +328,7 @@ function pingtest() {
   ping -c20 google.com
 }
 
+
 # ====================
 # ==     Other      ==
 # ====================
@@ -337,9 +336,9 @@ function pingtest() {
 export CLASSPATH=~/Projects/cs241/pub/classes:$CLASSPATH
 
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+[ -s "/usr/local/bin/virtualenvwrapper.sh" ] && source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
 
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-
