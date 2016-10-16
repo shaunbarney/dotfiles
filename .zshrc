@@ -277,5 +277,3 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
 
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-
-cd ~/Projects
