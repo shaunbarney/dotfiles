@@ -90,10 +90,16 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/sbin:~/bin
 
 # LaTeX
-export PATH=$PATH:/usr/texbin
+export PATH=$PATH:/usr/texbin:/Library/TeX/texbin
+
+# Jupyter
+export PATH=$PATH:~/anaconda/bin
 
 # Racket
 export PATH=$PATH:/Applications/Racket\ v6.1/bin
+
+# CS350
+export PATH=$PATH:~/Projects/cs350/sys161/bin:~/Projects/cs350/bin
 
 # coreutils
 export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
@@ -123,8 +129,6 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 # ====================
 
 # Easier navigation: .., ..., ...., ....., ~ and -
-
-alias dotfiles="~/.dotfiles/install.sh"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -273,3 +277,5 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
 
 [ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+
+cd ~/Projects
