@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # ==      Custom      ==
 # ======================
 
-export PATH=~/bin:$PATH
+export PATH=$PATH:/usr/local/sbin:~/bin
 
 # Prefer US English and use UTF-8
 export LANG=en_US.UTF-8
@@ -284,3 +284,18 @@ function tre() {
 function pingtest() {
   ping -c20 google.com
 }
+
+# ====================
+# ==     Other      ==
+# ====================
+
+export CLASSPATH=~/Projects/cs241/pub/classes:$CLASSPATH
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+[ -s "/usr/local/bin/virtualenvwrapper.sh" ] && source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
+
+[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
+
