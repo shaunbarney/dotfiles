@@ -14,7 +14,6 @@ function bracket {
 	echo %{$fg[blue]%}'['$1%{$fg[blue]%}']'
 }
 
-
 PROMPT=$'%{$fg[blue]%}┌$(bracket $(user)) $(bracket $(path))$(git_prompt_info)$(venv_prompt_info)
 %{$fg[blue]%}└%{$fg[blue]%}[%(?.%{$fg[magenta]%}.%{$fg[red]%})%(!.#.$)%{$fg[blue]%}] '
 

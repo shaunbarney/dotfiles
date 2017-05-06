@@ -29,7 +29,6 @@
 
 using namespace std;
 
-#define rint(x) scanf("%d", &(x))
 #define endl '\n'
 
 typedef long long LL;
@@ -37,12 +36,12 @@ typedef pair<int,int> I2;
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
 
-    ${0:}
+  ${0:}
 
-    return 0;
+  return 0;
 }
 ]]></content>
     <tabTrigger>cmain</tabTrigger>

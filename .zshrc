@@ -90,10 +90,16 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/sbin:~/bin
 
 # LaTeX
-export PATH=$PATH:/usr/texbin
+export PATH=$PATH:/usr/texbin:/Library/TeX/texbin
+
+# Jupyter
+export PATH=$PATH:~/anaconda/bin
 
 # Racket
 export PATH=$PATH:/Applications/Racket\ v6.1/bin
+
+# CS350
+export PATH=$PATH:~/Projects/cs350/sys161/bin:~/Projects/cs350/bin
 
 # coreutils
 export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
@@ -124,8 +130,6 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 
-alias dotfiles="~/.dotfiles/bootstrap.sh"
-
 alias ..="cd .."
 alias ...="cd ../.."
 
@@ -136,7 +140,6 @@ alias j="jobs"
 alias p="cd ~/Projects"
 alias p1="cd ~/Projects"
 alias p2="cd /Volumes/Data/Projects"
-alias sc="cd ~/Projects/School"
 
 alias grim="git rebase -i master"
 alias octave="octave --no-gui"
@@ -199,19 +202,12 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-# URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
-
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
 alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 
 # PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
 alias plistbuddy="/usr/libexec/PlistBuddy"
-
-# Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
-# (useful when executing time-consuming commands)
-alias badge="tput bel"
 
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
@@ -233,48 +229,6 @@ alias reload="exec $SHELL -l"
 # ==   Functions    ==
 # ====================
 
-# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
-function targz() {
-  local tmpFile="${@%/}.tar";
-  tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
-
-  size=$(
-    stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
-    stat -c"%s" "${tmpFile}" 2> /dev/null # GNU `stat`
-  );
-
-  local cmd="";
-  if (( size < 52428800 )) && hash zopfli 2> /dev/null; then
-    # the .tar file is smaller than 50 MB and Zopfli is available; use it
-    cmd="zopfli";
-  else
-    if hash pigz 2> /dev/null; then
-      cmd="pigz";
-    else
-      cmd="gzip";
-    fi;
-  fi;
-
-  echo "Compressing .tar using \`${cmd}\`…";
-  "${cmd}" -v "${tmpFile}" || return 1;
-  [ -f "${tmpFile}" ] && rm "${tmpFile}";
-  echo "${tmpFile}.gz created successfully.";
-}
-
-# Determine size of a file or total size of a directory
-function fs() {
-  if du -b /dev/null > /dev/null 2>&1; then
-    local arg=-sbh;
-  else
-    local arg=-sh;
-  fi
-  if [[ -n "$@" ]]; then
-    du $arg -- "$@";
-  else
-    du $arg .[^.]* *;
-  fi;
-}
-
 # Use Git’s colored diff when available
 hash git &>/dev/null;
 if [ $? -eq 0 ]; then
@@ -282,15 +236,6 @@ if [ $? -eq 0 ]; then
     git diff --no-index --color-words "$@";
   }
 fi;
-
-# Create a data URL from a file
-function dataurl() {
-  local mimeType=$(file -b --mime-type "$1");
-  if [[ $mimeType == text/* ]]; then
-    mimeType="${mimeType};charset=utf-8";
-  fi
-  echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
-}
 
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
@@ -301,18 +246,8 @@ function server() {
   python2.7 -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
 }
 
-# Syntax-highlight JSON strings or files
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-function json() {
-  if [ -t 0 ]; then # argument
-    python -mjson.tool <<< "$*" | pygmentize -l javascript;
-  else # pipe
-    python -mjson.tool | pygmentize -l javascript;
-  fi;
-}
-
 # Run `dig` and display the most useful info
-function digga() {
+function digg() {
   dig +nocmd "$1" any +multiline +noall +answer;
 }
 
