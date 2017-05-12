@@ -49,21 +49,24 @@ ZSH_THEME="zihao"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(sublime zsh-autosuggestions docker kubectl)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	plugins=(sublime zsh-autosuggestions docker kubectl)
+else
+	plugins=(zsh-autosuggestions)
+fi
 
 # User configuration
 
-export PATH="/Users/zihao/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+  export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -84,44 +87,47 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ======================
-# ==      Custom      ==
+# ==      Exports     ==
 # ======================
 
-export PATH=$PATH:/usr/local/sbin:~/bin
+# Default Path
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
-# LaTeX
-export PATH=$PATH:/usr/texbin:/Library/TeX/texbin
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	# LaTeX
+	export PATH=$PATH:/usr/texbin:/Library/TeX/texbin
 
-# Jupyter
-export PATH=$PATH:~/anaconda/bin
+	# Racket
+	export PATH=$PATH:/Applications/Racket\ v6.1/bin
 
-# Racket
-export PATH=$PATH:/Applications/Racket\ v6.1/bin
+	# CS350
+	export PATH=$PATH:~/Projects/cs350/sys161/bin:~/Projects/cs350/bin
 
-# CS350
-export PATH=$PATH:~/Projects/cs350/sys161/bin:~/Projects/cs350/bin
+	# coreutils
+	export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
 
-# coreutils
-export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
+	# Homebrew
+	export PATH=/usr/local/sbin:$PATH
 
-# Prefer US English and use UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL="en_US.UTF-8";
+	# Link Homebrew casks in `/Applications` rather than `~/Applications`
+	export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 
-# Make vim the default editor
-export EDITOR="vim";
+	export CLASSPATH=~/Projects/cs241/pub/classes:$CLASSPATH
 
-# Highlight section titles in manual pages
-export LESS_TERMCAP_md="${yellow}";
+	export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
+fi
 
-# Don’t clear the screen after quitting a manual page
-export MANPAGER="less -X";
+# Node Modules
+export PATH='./node_modules/.bin':$PATH
 
-# Always enable colored `grep` output
-export GREP_OPTIONS="--color=auto";
+# Home bin
+export PATH=~/bin:$PATH
 
-# Link Homebrew casks in `/Applications` rather than `~/Applications`
-export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+export GOPATH=~/go
+
+export VIRTUALENVWRAPPER_PYTHON=$(which python3)
+[ -s "/usr/local/bin/virtualenvwrapper.sh" ] && source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 
 # ====================
@@ -134,6 +140,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 
 # Shortcuts
+alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias h="history"
 alias j="jobs"
@@ -146,9 +153,11 @@ alias octave="octave --no-gui"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
-  colorflag="--color"
-else # OS X `ls`
-  colorflag="-G"
+	colorflag="--color"
+	export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+else # macOS `ls`
+	colorflag="-G"
+	export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
 fi
 
 # List all files colorized in long format
@@ -163,44 +172,34 @@ alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
 
+# Always enable colored `grep` output
+# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
 # IP addresses
 alias ip="curl -4 https://icanhazip.com/"
 alias ip6="curl -6 https://icanhazip.com/"
-alias localip="ipconfig getifaddr en0"
-
-# Clean up LaunchServices to remove duplicates in the “Open With” menu
-alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
-# View HTTP traffic
-alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+alias iplocal="ipconfig getifaddr en0"
 
 # Canonical hex dump; some systems have this symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"
 
-# OS X has no `md5sum`, so use `md5` as a fallback
+# macOS has no `md5sum`, so use `md5` as a fallback
 command -v md5sum > /dev/null || alias md5sum="md5"
 
-# OS X has no `sha1sum`, so use `shasum` as a fallback
+# macOS has no `sha1sum`, so use `shasum` as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
-
-# Recursively delete `.DS_Store` files
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-
-# Empty the Trash on all mounted volumes and the main HDD
-# Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-# Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
@@ -209,18 +208,17 @@ alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Re
 # PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
 alias plistbuddy="/usr/libexec/PlistBuddy"
 
+# Airport CLI alias
+alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+
+# Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
+# (useful when executing time-consuming commands)
+alias bell="tput bel"
+
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
 # find . -name .gitattributes | map dirname
 alias map="xargs -n1"
-
-# One of @janmoesen’s ProTip™s
-for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-  alias "$method"="lwp-request -m '$method'"
-done
-
-# Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
@@ -263,29 +261,9 @@ function pingtest() {
   ping -c20 google.com
 }
 
-
 # ====================
 # ==     Other      ==
 # ====================
 
-export CLASSPATH=~/Projects/cs241/pub/classes:$CLASSPATH
+eval "$(scmpuff init -s)"
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-[ -s "/usr/local/bin/virtualenvwrapper.sh" ] && source /usr/local/bin/virtualenvwrapper.sh
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-export FONTCONFIG_PATH=/opt/X11/lib/X11/fontconfig
-
-[ -s "$HOME/.scm_breeze/scm_breeze.sh" ] && source "$HOME/.scm_breeze/scm_breeze.sh"
-
-export PATH=$PATH:/usr/local/Cellar/node/7.1.0/bin
-
-PATH="/Users/zihao/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/zihao/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/zihao/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/zihao/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/zihao/perl5"; export PERL_MM_OPT;
-
-export GOPATH=~/go
-
-export PATH='./node_modules/.bin/':$PATH

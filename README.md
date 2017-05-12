@@ -1,23 +1,20 @@
 # Zihao’s dotfiles
 
-## Installation
+## Basic Installation
 
 ### Using Git and the bootstrap script
 
 ```bash
-git clone https://github.com/zzh8829/dotfiles.git && cd dotfiles && source install.sh
+git clone https://github.com/zzh8829/dotfiles.git && cd dotfiles && source dotfiles.sh
 ```
-
-### Sublime
+## Complete Dev Setup
 
 ```
-./other/sublime/install.py
-```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-### Sensible OS X defaults
-
-When setting up a new Mac, you may want to set some sensible OS X defaults:
-
-```bash
-./other/macOS.sh
+git clone https://github.com/zzh8829/dotfiles.git && cd dotfiles
+./dotfiles.sh
+./homebrew.sh
+./osx.sh
+./sublime.sh
 ```
