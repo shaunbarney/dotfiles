@@ -50,9 +50,9 @@ ZSH_THEME="zihao"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if [[ "$OSTYPE" == "darwin"* ]]; then
-	plugins=(sublime zsh-autosuggestions docker kubectl extract colorize)
+	plugins=(sublime zsh-autosuggestions docker kubectl extract colorize history)
 else
-	plugins=(zsh-autosuggestions extract)
+	plugins=(zsh-autosuggestions extract history)
 fi
 
 # User configuration
