@@ -1,11 +1,11 @@
-# Zihao’s dotfiles
+# Shaun’s dotfiles
 
 ## Basic Installation
 
 ### Using Git and the bootstrap script
 
 ```bash
-git clone https://github.com/zzh8829/dotfiles.git && cd dotfiles && source dotfiles.sh
+git clone https://github.com/shaunbarney/dotfiles.git && cd dotfiles && source dotfiles.sh
 ```
 ## Complete Dev Setup (Mac)
 
@@ -20,7 +20,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
 mkdir Repos && cd Repos
-git clone git@github.com:zzh8829/dotfiles && cd dotfiles
+git clone https://github.com/shaunbarney/dotfiles.git && cd dotfiles
 ./dotfiles.sh
 ./homebrew.sh
 ./macos.sh
@@ -32,3 +32,5 @@ gcloud config set project gcloud
 gcloud config set compute/zone us-west1-a
 gcloud container clusters get-credentials gk
 ```
+
+Credit: https://github.com/zzh8829/dotfiles
