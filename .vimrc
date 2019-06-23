@@ -73,11 +73,6 @@ set noeol
 
 " Custom vim exscaping
 inoremap jj <Esc>
-" Key mappings
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
 
 " Automatic commands
 if has("autocmd")
@@ -147,14 +142,26 @@ Plug 'junegunn/fzf.vim'
 nnoremap <c-p> :FZF<cr>
 
 " Async
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 let g:deoplete#enable_at_startup = 1
+Plug 'deoplete-plugins/deoplete-jedi'
+let g:deoplete#sources#jedi#enable_typeinfo = 0
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'jiangmiao/auto-pairs'
+
+" Nerd commenter
+Plug 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 0
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+
+
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Common langauge syntax
@@ -167,7 +174,36 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
+Plug 'tpope/vim-fugitive'
+Plug 'honza/vim-snippets'
+
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<C-j>"
+
+Plug 'ervandew/supertab'
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+Plug 'plasticboy/vim-markdown'
+Plug 'tmhedberg/SimpylFold'
+Plug 'neomake/neomake'
+:highlight NeomakeErrorMsg ctermfg=227 ctermbg=237
+let g:neomake_warning_sign = {
+  \ 'text': 'W',
+  \ 'texthl': 'WarningMsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'E',
+  \ 'texthl': 'ErrorMsg',
+  \ }
+
+let g:neomake_open_list = 2
+let g:neomake_jsx_enabled_makers = ['eslint']
+let g:neomake_python_enabled_makers = ['pyflakes']
 call plug#end()
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 function! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -177,3 +213,8 @@ function! <SID>StripTrailingWhitespaces()
 endfun
 
 autocmd FileType sh,python,c,java,javascript  :call <SID>StripTrailingWhitespaces()
+
+call neomake#configure#automake('nrwi', 500)
+
+nnoremap <F9> <Esc>:w<CR>:!clear;python %<CR>
+nnoremap <F10> <Esc>:w<CR>:!clear;python -i %<CR>

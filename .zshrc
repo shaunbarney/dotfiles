@@ -9,6 +9,7 @@ if [[ $(uname) == 'Linux' ]]; then
   export OS=linux
 elif [[ $(uname) == 'Darwin' ]]; then
   export OS=macos
+  export TERM="xterm-256color"
 elif [[ $(uname -r) == *"Microsoft"* ]]; then
   export OS=wsl
 fi
