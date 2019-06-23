@@ -84,14 +84,9 @@ if has("autocmd")
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 endif
 
-if has('nvim')
-  " Use Homebrew Python on Macs
-  if has('macunix')
-    let g:python3_host_prog='/usr/local/bin/python3'
-  endif
 
-  let g:python3_host_prog = get(g:, 'python3_host_prog', '/usr/bin/python3')
-endif
+let g:python_host_prog = 'python'
+let g:python3_host_prog = 'python3'
 
 " =========== PLUG STARTS HERE ==============
 call plug#begin('~/.vim/plugged')
