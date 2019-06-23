@@ -145,6 +145,8 @@ alias sleep="pmset sleepnow"
 
 # Fuzzy finder binding
 bindkey -s '^f' 'vim $(fzf)\n'
+alias dfc='vim $(find ~/dotfiles | fzf)'
+alias so="source ~/dotfiles/dotfiles.sh && source ~/.zshrc"
 
 # List all files colorized in long format
 alias l="ls -lF ${colorflag}"
