@@ -218,3 +218,4 @@ call neomake#configure#automake('nrwi', 500)
 
 nnoremap <F9> <Esc>:w<CR>:!clear;python %<CR>
 nnoremap <F10> <Esc>:w<CR>:!clear;python -i %<CR>
+

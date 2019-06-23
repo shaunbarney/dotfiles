@@ -48,10 +48,7 @@ brew install kubernetes-helm
 # Install Cask
 brew tap caskroom/cask
 
-brew cask install visual-studio-code
 brew cask install xquartz
-brew cask install bettertouchtool
-brew cask install postman
 brew cask install docker
 brew cask install osxfuse && brew install sshfs
 brew cask install google-cloud-sdk
@@ -62,7 +59,6 @@ brew cask install 1password
 brew cask install skim
 brew cask install discord
 brew cask install spotify
-brew cask install vlc
 brew cask install the-unarchiver
 brew cask install grandperspective
 

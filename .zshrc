@@ -141,6 +141,8 @@ alias dl="cd $HOME/Downloads"
 alias dt="cd $HOME/Desktop"
 alias r="cd $REPOS"
 alias p="cd $PROJECTS"
+alias sleep="pmset sleepnow"
+
 # Fuzzy finder binding
 bindkey -s '^f' 'vim $(fzf)\n'
 
