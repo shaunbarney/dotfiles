@@ -140,6 +140,8 @@ alias dl="cd $HOME/Downloads"
 alias dt="cd $HOME/Desktop"
 alias r="cd $REPOS"
 alias p="cd $PROJECTS"
+# Fuzzy finder binding
+bindkey -s '^f' 'vim $(fzf)\n'
 
 # List all files colorized in long format
 alias l="ls -lF ${colorflag}"
@@ -334,6 +336,19 @@ elif [[ $OS == "linux" ]]; then
   fi
 fi
 
-# Anaconda
-[[ -e /usr/local/anaconda3/bin/conda ]] && eval "$('/usr/local/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-[[ -e /usr/local/anaconda3 ]] && . /usr/local/anaconda3/etc/profile.d/conda.sh && conda activate
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/shaunbarney/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/shaunbarney/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/shaunbarney/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/shaunbarney/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+conda deactivate

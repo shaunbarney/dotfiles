@@ -50,14 +50,13 @@ set gdefault
 " UI stuff
 syntax on
 " Show “invisible” characters
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
 set list
 set laststatus=2
 set mouse=a
 set noerrorbells
 set nostartofline
 set ruler
-set number
+set relativenumber
 set cursorline
 set shortmess=atI
 set showmode
@@ -71,6 +70,14 @@ set ttyfast
 set encoding=utf-8 nobomb
 set binary
 set noeol
+
+" Custom vim exscaping
+inoremap jj <Esc>
+" Key mappings
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 " Automatic commands
 if has("autocmd")
@@ -91,6 +98,7 @@ if has('nvim')
   let g:python3_host_prog = get(g:, 'python3_host_prog', '/usr/bin/python3')
 endif
 
+" =========== PLUG STARTS HERE ==============
 call plug#begin('~/.vim/plugged')
 
 Plug 'christoomey/vim-tmux-navigator'
@@ -152,6 +160,13 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " Common langauge syntax
 Plug 'sheerun/vim-polyglot'
 
+" Smooth scrolling
+Plug 'terryma/vim-smooth-scroll'
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
 call plug#end()
 
 function! <SID>StripTrailingWhitespaces()
@@ -162,4 +177,3 @@ function! <SID>StripTrailingWhitespaces()
 endfun
 
 autocmd FileType sh,python,c,java,javascript  :call <SID>StripTrailingWhitespaces()
-
