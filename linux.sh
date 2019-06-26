@@ -9,6 +9,7 @@ mkdir -p ~/bin
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone git://github.com/zsh-users/zsh-autosuggestion ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # scmpuff
 SCMPUFF_TMP=$(mktemp -d)
 SCMPUFF_VER=0.2.1
