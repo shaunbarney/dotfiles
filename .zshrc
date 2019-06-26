@@ -144,7 +144,7 @@ alias p="cd $PROJECTS"
 alias sleep="pmset sleepnow"
 
 # Fuzzy finder binding
-bindkey -s '^f' 'vim $(fzf)\n'
+alias f='vim $(fzf)\n'
 alias dfc='vim $(find ~/dotfiles | fzf)'
 alias so="source ~/dotfiles/dotfiles.sh && source ~/.zshrc"
 
